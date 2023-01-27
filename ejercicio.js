@@ -32,16 +32,28 @@ class ProductManager {
             code : code,
         } )
 
-       
+       if(titulo === this.titulo  || descripcion === this.description  || precio === this.precio  || imagen ===  this.imagen  || stock === this.stock  || id === this.id  || code === this.code){
+
+            console.log (this.products)
+            
+       } else{
+         console.log("Error de lectura de datos.")
+       }
 
     }
-    
+     
     
     getProductsById(id) {
         return this.products.find( products => { products.id ===id;
-        this.id ++;})
+        })
+
+        
     }
 
+    getProductsById(){
+        return this.products 
+        
+    }
 }
     
 
