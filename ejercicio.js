@@ -2,12 +2,20 @@ class ProductManager {
 
     constructor () {
        
-        this.id = 0
+        this.id = IdUnico
         this.products = []
         
     }
 
-
+    static IdUnico(){
+        if (this.creandoId){
+            this.creandoId++
+        }
+        else{
+            this.creandoId = 1
+        }
+        return this.creandoId
+    }
        
 
     addProduct(titulo, descripcion, precio, imagen, stock, code) {
@@ -21,6 +29,13 @@ class ProductManager {
         })
 
         
+        if(titulo === this.titulo  || descripcion === this.description  || precio === this.precio  || imagen ===  this.imagen  || stock === this.stock  || id === this.id  || code === this.code){
+ 
+             console.log (this.products)
+             
+        } else{
+          console.log("Error de lectura de datos.")
+        }
 
         this.products.push({
             titulo : titulo,
@@ -32,13 +47,6 @@ class ProductManager {
             code : code,
         } )
 
-       if(titulo === this.titulo  || descripcion === this.description  || precio === this.precio  || imagen ===  this.imagen  || stock === this.stock  || id === this.id  || code === this.code){
-
-            console.log (this.products)
-            
-       } else{
-         console.log("Error de lectura de datos.")
-       }
 
     }
      
