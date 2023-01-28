@@ -36,21 +36,25 @@ class ProductManager {
         if(titulo != "" || descripcion != "" || precio != ""  || imagen != ""   || stock != ""  || id != "" || code != "" ){
  
                 console.log (this.products)
+
+                this.id++
+
+                this.products.push({
+                    titulo : titulo,
+                    descripcion : descripcion,
+                    precio : precio,
+                    imagen : imagen,
+                    stock : stock, 
+                    id : this.id,
+                    code : code,
+                } )
              
         } else{
 
           return console.log("Error de lectura de datos.")
         }
 
-        this.products.push({
-            titulo : titulo,
-            descripcion : descripcion,
-            precio : precio,
-            imagen : imagen,
-            stock : stock, 
-            id : this.id,
-            code : code,
-        } )
+       
 
 
     }
@@ -63,7 +67,7 @@ class ProductManager {
         
     }
 
-    getProductsById(){
+    getProducts(){
         return this.products 
         
     }
