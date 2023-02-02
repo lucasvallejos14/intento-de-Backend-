@@ -86,3 +86,119 @@ console.log(productos)
 const copia = productos.getProductsById();
 
 console.log(copia)
+
+
+
+
+
+
+
+const fs = require ("fs")
+const { json } = require("stream/consumers")
+
+const producto1 = {
+    id:1,
+    nombre: "Coca-Cola",
+    descripcion: "Sabor Original",
+    precio: "$100",
+    imagen: "https://jumboargentina.vtexassets.com/arquivos/ids/441468/Coca-Cola-25-L-3-17483.jpg?v=636528846231600000",
+    stock: 20,
+    code: "ab1",
+
+}
+
+const ProductManager = async () => {
+    await fs.promises.writeFile('./productos.txt' , "Estos son los productos en venta: ")
+
+    let lista = await fs.promises.readFile ('./productos.txt' , 'utf-8')
+
+    console.log (lista)
+
+    await fs.promises.appendFile ( './productos.txt', JSON.stringify(producto1))
+
+    lista = await fs.promises.readFile ('./productos.txt' , 'utf-8')
+    
+    let product = JSON.parse (lista)
+
+    if(product.some ( producto =>  producto.id === 1 )) {
+
+        product = product.find(producto => producto.id !== 1)
+ 
+         console.log(product)
+         
+     } else{
+ 
+         console.log("error")
+ 
+     }
+    
+    if(product.some ( producto =>  producto.id === 1 )) {
+
+       product = product.filter(producto => producto.id !== 1)
+
+        console.log(product)
+        
+    } else{
+
+        console.log("error")
+
+    }
+
+    productos.push ({
+        id:3,
+        nombre: "Coca-Cola",
+        descripcion: "Sabor Original",
+        precio: "$100",
+        imagen: "https://jumboargentina.vtexassets.com/arquivos/ids/441468/Coca-Cola-25-L-3-17483.jpg?v=636528846231600000",
+        stock: 20,
+        code: "ab3",
+
+    })
+
+    await fs.proimises.writeFile('./productos.txt', JSON.stringify(product))
+
+}
+
+ProductManager()
+
+
+JSON.stringify(productos)
+
+
+
+const http = require ('http')
+
+const PORT = 4000
+
+const server = http.createServer((request,  response) => {
+    response.end ( 'este es mi primer servidorrrr')
+})
+
+
+server.listen(PORT, () =>{
+    console.log('server on port ${PORT}')
+})
+
+import express from 'express'
+
+const app = express()
+
+
+
+app.get('/products', (req, res) => {
+
+    res.end(productos)
+})
+
+app.get('/' , (req, res) => {
+
+    res.send ("hola")
+
+})
+
+app.listen (PORT, () => {
+
+    console.log('server on port ${PORT}')
+
+})
+
