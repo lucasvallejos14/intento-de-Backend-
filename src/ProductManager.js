@@ -1,7 +1,11 @@
+const fs = require ('fs')
+
+
+
 export class ProductManager {
 
     constructor () {
-       
+        this.path = path
         this.id = 0
         this.products = []
         
@@ -21,9 +25,15 @@ export class ProductManager {
     // }
        
 
-    addProduct(titulo, descripcion, precio, imagen, stock, code) {
+    async addProduct(producto) {
+ 
+        //sin el async (titulo, descripcion, precio, imagen, stock, code)
 
+        const prods = JSON.parse(await fs.readFile(this.path, 'utf-8'))
 
+        prods.push(producto)
+
+        await fs.writeFile(this.path, JSON.stringify(prods))
         
         this.products.find( (codigo) => {
 
@@ -60,7 +70,8 @@ export class ProductManager {
     }
      
     
-    getProductsById(id) {
+     getProductsById(id) {
+
         return this.products.find( products => { products.id ===id;
         })
 
