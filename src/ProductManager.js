@@ -25,15 +25,11 @@ export class ProductManager {
     // }
        
 
-    async addProduct(producto) {
+     addProduct(titulo, descripcion, precio, imagen, stock, code) {
  
         //sin el async (titulo, descripcion, precio, imagen, stock, code)
 
-        const prods = JSON.parse(await fs.readFile(this.path, 'utf-8'))
-
-        prods.push(producto)
-
-        await fs.writeFile(this.path, JSON.stringify(prods))
+       
         
         this.products.find( (codigo) => {
 
@@ -58,6 +54,12 @@ export class ProductManager {
                     id : this.id,
                     code : code,
                 } )
+        
+        const prods = JSON.parse(fs.promises.readFile(this.path, 'utf-8'))
+
+        
+
+        fs.promises.writeFile(this.path, JSON.stringify(prods))        
              
         } else{
 
@@ -79,6 +81,9 @@ export class ProductManager {
     }
 
     getProducts(){
+        for ( limite = 1 ; limite < 5; limite++){
+            console.log(productos)
+        }
         return this.products 
         
     }

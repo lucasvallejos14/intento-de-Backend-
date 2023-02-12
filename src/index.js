@@ -1,6 +1,6 @@
 import  express  from "express";
 
-import { ProductManager } from "./ProductManager";
+import { ProductManager } from "./ProductManager.js";
 
 const app = express()
 
@@ -18,9 +18,11 @@ app.use(express.urlencoded({extended: true}))
 //obtener todos los productos
 app.get('/product', async (req, res)=> {
 
-    const {titulo} = req.query;
+    const {limite} = req.query;
 
-    console.log(titulo)
+    
+
+    console.log(limite)
 
     const productos = await productManager.getProducts()
 
@@ -29,11 +31,15 @@ app.get('/product', async (req, res)=> {
     res.send(JSON.stringify(productos))
 })
 
+let mensaje = console.log("producto no encontrado")
 //me devuelve el id del elemento
 app.get('/product/:id', async (req, res)=>{
 
     const producto =await productManager.getProductsById(req.params.id)
     
+    if (producto == this.id <5 ){
+        return mensaje
+    }
     console.log(producto)
     res.send(JSON.stringify(productos))
 })
@@ -44,4 +50,8 @@ app.post('/product' ,async (req, res) => {
     let mensaje = await productManager.addProduct(req.body)
 
     res.send(mensaje)
+})
+
+app.listen( PORT, ()=>{
+    console.log('server on port ${PORT}')
 })
